@@ -12,9 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('landing');
 });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//registration paths
+Route::get('/register', 'RegistrationsController@create');
+
+Route::post('/register', 'RegistrationsController@store');
+
+// session paths
+Route::get('/login', 'SessionsController@create');
+Route::get('/logout', 'SessionsController@destroy');
+
+
+// user paths
+Route::get('/dashboard', 'RegistrationsController@show')->name('dashboard');
