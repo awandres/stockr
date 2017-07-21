@@ -791,6 +791,12 @@ __webpack_require__(10);
 
 __webpack_require__(50);
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 /***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -31707,7 +31713,7 @@ $(document).ready(function () {
   if ($stocksTable.length > 0) {
     (function () {
       var $stockRows = $stocksTable.find('tr.stock-info');
-      var yesterday = new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0].toString();
+      var day = new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0].toString();
 
       var _loop = function _loop(i) {
         var $stockRow = $($stockRows[i]);
@@ -31715,7 +31721,7 @@ $(document).ready(function () {
         var symbol = $stockRow.find('.symbol').text().trim();
 
         requestDailyTimeSeries(symbol, function (result) {
-          var price = parseFloat(result['Time Series (Daily)'][yesterday]['4. close'], 2).toFixed(2);
+          var price = parseFloat(result['Time Series (Daily)'][day]['4. close'], 2).toFixed(2);
 
           $stockRow.find('.price').text('$' + price);
         });
