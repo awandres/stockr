@@ -26,6 +26,14 @@
                   </div>
                 </div>
               </div>
+              <div class="col s1 remove">
+                <form class="" action="/portfolio/remove_stock" method="post">
+                  {{ csrf_field() }}
+                  {{ method_field('DELETE') }}
+                  <input type="hidden" name="stock_id" value="{{$stock->id}}">
+                  <button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="remove from portfolio"><i class="material-icons">remove</i></button>
+                </form>
+              </div>
             </div>
           </a>
         @endforeach

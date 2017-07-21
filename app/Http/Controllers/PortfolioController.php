@@ -31,5 +31,24 @@ class PortfolioController extends Controller
       return redirect()->route('dashboard');
     }
 
+    public function remove_stock()
+    {
+      $stock_id = request('stock_id');
+      $stock = Stock::find($stock_id);
+      $portfolio = auth()->user()->portfolio;
+
+      // prevent a stock from being added twice
+      if ($portfolio->stocks->contains($stock_id)) {
+        $portfolio->stocks()->detach($stock_id);
+      }
+
+
+      if (request()->ajax()) {
+        return $stock;
+      }
+
+      return redirect()->route('dashboard');
+    }
+
 
 }

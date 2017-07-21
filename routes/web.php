@@ -38,3 +38,4 @@ Route::get('/stocks/{stock}', 'StocksController@show');
 
 // portfolio paths
 Route::post('/portfolio/add_stock', 'PortfolioController@add_stock');
+Route::delete('/portfolio/remove_stock', 'PortfolioController@remove_stock');
