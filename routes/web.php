@@ -23,6 +23,7 @@ Route::post('/register', 'RegistrationsController@store');
 
 // session paths
 Route::get('/login', 'SessionsController@create');
+Route::post('/login', 'SessionsController@store');
 Route::get('/logout', 'SessionsController@destroy');
 
 
