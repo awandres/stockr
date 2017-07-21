@@ -29,6 +29,10 @@
         @include('layouts.errors')
 
       </form>
+
+      <div class="">
+        <span>If you don't have an account yet, <a href="/register">click here!</a></span>
+      </div>
     </div>
   </div>
 

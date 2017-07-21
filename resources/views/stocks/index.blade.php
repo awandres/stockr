@@ -32,7 +32,9 @@
   </table>
 </div>
 
-{{ $stocks->links() }}
+<div class="pagination">
+  {{ $stocks->links() }}
+</div>
 
 
 @endsection
