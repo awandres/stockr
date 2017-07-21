@@ -22,10 +22,12 @@ class CreatePortfolioStockTable extends Migration
              $table->integer('stock_id')->unsigned();
 
              $table->foreign('portfolio_id')
-                   ->references('id')->on('portfolios');
+                   ->references('id')->on('portfolios')
+                   ->onDelete('cascade');
 
              $table->foreign('stock_id')
-                   ->references('id')->on('stocks');
+                   ->references('id')->on('stocks')
+                   ->onDelete('cascade');
          });
      }
 

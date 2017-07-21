@@ -10,4 +10,9 @@ class Stock extends Model
     {
       return 'slug';
     }
+
+    public function createSlug()
+    {
+      $this->slug = str_slug($this->symbol);
+    }
 }

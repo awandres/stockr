@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use App\User;
 use App\Portfolio;
+use App\Stock;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,10 @@ class EventServiceProvider extends ServiceProvider
         User::created(function($user) {
           $portfolio = new Portfolio();
           $user->portfolio()->save($portfolio);
+        });
+
+        Stock::created(function($stock) {
+          $stock->createSlug();
         });
     }
 }

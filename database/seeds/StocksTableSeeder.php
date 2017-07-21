@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use Crockett\CsvSeeder\CsvSeeder;
 use App\Stock;
 
-class StocksTableSeeder extends CsvSeeder
+class StocksTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,36 +15,42 @@ class StocksTableSeeder extends CsvSeeder
     {
         $MARKETS = ['amex', 'nasdaq', 'nyse'];
 
-        $this->aliases = [
-          'Name' => 'name',
-          'Symbol' => 'symbol',
-          'Sector' => 'sector'
-        ];
+        // $this->aliases = [
+        //   'Name' => 'name',
+        //   'Symbol' => 'symbol',
+        //   'Sector' => 'sector'
+        // ];
+        //
+        // $this->mapping = [
+        //   0 => 'Symbol',
+        //   1 => 'Name',
+        //   5 => 'Sector',
+        //   6 => 'industry'
+        // ];
 
-        $this->mapping = [
-          0 => 'Symbol',
-          1 => 'Name',
-          5 => 'Sector',
-          6 => 'industry'
-        ];
-        
-        // foreach ($MARKETS as $market) {
-        //   if (($handle = fopen (database_path("seeds/stock_names/{$market}.csv"), 'r')) !== FALSE)
-        //   {
-        //     while ( ($data = fgetcsv ( $handle, 1000, ',' )) !== FALSE ) {
-        //       $stock = new Stock();
-        //       $stock->symbol = $data[0];
-        //       $stock->name = $data[1];
-        //       $stock->sector = $data[5];
-        //       $stock->industry = $data[6];
-        //       $stock->save();
-        //     }
-        //     fclose ( $handle );
-        //   }
-        // }
+        foreach ($MARKETS as $market) {
+          if (($handle = fopen (database_path("seeds/stock_names/{$market}.csv"), 'r')) !== FALSE)
+          {
+            while ( ($data = fgetcsv ( $handle, 1000, ',' )) !== FALSE ) {
+              if( !empty($data[0])
+                  && !Stock::where('symbol', $data[0])->exists()
+                  && $data[0] != 'Symbol') {
+                echo $data[0] . '\n';
+                $stock = new Stock();
+                $stock->symbol = $data[0];
+                $stock->name = $data[1];
+                $stock->sector = $data[5];
+                $stock->industry = $data[6];
+                $stock->createSlug();
+                $stock->save();
+              }
+            }
+            fclose ( $handle );
+          }
+        }
 
-        $this->seedFromCSV(database_path("seeds/stock_names/nasdaq.csv"), 'stocks');
-        $this->seedFromCSV(database_path("seeds/stock_names/nyse.csv"), 'stocks');
-        $this->seedFromCSV(database_path("seeds/stock_names/amex.csv"), 'stocks');
+        // $this->seedFromCSV(database_path("seeds/stock_names/nasdaq.csv"), 'stocks');
+        // $this->seedFromCSV(database_path("seeds/stock_names/nyse.csv"), 'stocks');
+        // $this->seedFromCSV(database_path("seeds/stock_names/amex.csv"), 'stocks');
     }
 }
