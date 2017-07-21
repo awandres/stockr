@@ -21,6 +21,7 @@ class CreateStocksTable extends Migration
             $table->string('sector');
             $table->string('industry');
             $table->string('slug')->default('');
+            $table->decimal('price', 15, 2)->default(0);
         });
     }
 

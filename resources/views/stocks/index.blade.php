@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="stocks-table">
-  <table id="stocksTable" class="bordered responsive-table highlight centered">
+  <table id="stocksList" class="bordered responsive-table highlight centered">
     <thead>
       <th>Symbol</th>
       <th>Name</th>

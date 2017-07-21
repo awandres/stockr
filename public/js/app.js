@@ -31702,11 +31702,13 @@ module.exports = function spread(callback) {
 
 $(document).ready(function () {
 
-  var $stocksTable = $('#stocksTable');
+  var $stocksList = $('#stocksList');
 
-  if ($stocksTable.length > 0) {
+  console.log($stocksList);
+
+  if ($stocksList.length > 0) {
     (function () {
-      var $stockRows = $stocksTable.find('tr.stock-info');
+      var $stockRows = $stocksList.find('.stock-info');
       var day = new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0].toString();
 
       var _loop = function _loop(i) {

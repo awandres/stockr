@@ -1,9 +1,11 @@
 $(document).ready(function(){
 
-  const $stocksTable = $('#stocksTable');
+  const $stocksList = $('#stocksList');
 
-  if ($stocksTable.length > 0) {
-    const $stockRows = $stocksTable.find('tr.stock-info');
+  console.log($stocksList);
+
+  if ($stocksList.length > 0) {
+    const $stockRows = $stocksList.find('.stock-info');
     const day = new Date(new Date().setDate(new Date().getDate()-1)).toISOString().split('T')[0].toString();
 
     for (let i = 0; i < $stockRows.length; i++) {
