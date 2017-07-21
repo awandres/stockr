@@ -33,6 +33,7 @@ Route::get('/dashboard', 'UsersController@show')->name('dashboard');
 
 // stocks paths
 Route::get('/stocks', 'StocksController@index');
+Route::post('/stocks', 'StocksController@search');
 Route::get('/stocks/{stock}', 'StocksController@show');
 
 // portfolio paths

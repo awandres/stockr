@@ -2,8 +2,6 @@ $(document).ready(function(){
 
   const $stocksList = $('#stocksList');
 
-  console.log($stocksList);
-
   if ($stocksList.length > 0) {
     const $stockRows = $stocksList.find('.stock-info');
     const day = new Date(new Date().setDate(new Date().getDate()-1)).toISOString().split('T')[0].toString();

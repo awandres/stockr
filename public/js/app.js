@@ -31704,8 +31704,6 @@ $(document).ready(function () {
 
   var $stocksList = $('#stocksList');
 
-  console.log($stocksList);
-
   if ($stocksList.length > 0) {
     (function () {
       var $stockRows = $stocksList.find('.stock-info');

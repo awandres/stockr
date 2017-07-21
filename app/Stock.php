@@ -11,17 +11,25 @@ class Stock extends Model
       return 'slug';
     }
 
-    public function scopeSearchBySymbol($query, $symbol)
+    public function scopeSearchBySymbol($query, $symbol, $or = false)
     {
       if (!empty($symbol)) {
-        return $query->where('symbol', 'LIKE', "%{$symbol}%");
+        if ($or) {
+          return $query->orWhere('symbol', 'LIKE', "%{$symbol}%");
+        } else {
+          return $query->where('symbol', 'LIKE', "%{$symbol}%");
+        }
       }
     }
 
-    public function scopeSearchByName($query, $name)
+    public function scopeSearchByName($query, $name, $or = false)
     {
       if (!empty($name)) {
-        return $query->where('name', 'LIKE', "%{$name}%");
+        if ($or) {
+          return $query->orWhere('name', 'LIKE', "%{$name}%");
+        } else {
+          return $query->where('name', 'LIKE', "%{$name}%");
+        }
       }
     }
 

@@ -2,6 +2,47 @@
 
 @section('content')
 
+<div class="row">
+  <div class="col s12">
+    <form class="" action="/stocks" method="post">
+      {{  csrf_field() }}
+      <div class="row">
+        <div class="col s12 input-field">
+
+          <i class="material-icons prefix">search</i>
+          <input id="search" name="search" type="text" class="validate">
+          <label for="search">Search</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <span class="switch" style="margin-right:1em;">
+            search by stock symbol:
+            <label>
+              Off
+              <input type="checkbox" id="by_symbol" name="by_symbol">
+              <span class="lever"></span>
+              On
+            </label>
+          </span>
+          <span class="switch">
+            search by company name:
+            <label>
+              Off
+              <input type="checkbox" id="by_name" name="by_name">
+              <span class="lever"></span>
+              On
+            </label>
+          </span>
+        </div>
+
+      </div>
+
+
+    </form>
+  </div>
+</div>
+
 <div class="stocks-table">
   <table id="stocksList" class="bordered responsive-table highlight centered">
     <thead>
