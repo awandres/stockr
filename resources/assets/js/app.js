@@ -7,4 +7,5 @@
 
 require('./bootstrap');
 require('chart.js');
+window.moment=require('moment');
 require('./alphaVantage');

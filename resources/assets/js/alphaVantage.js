@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
   const $stocksList = $('#stocksList');
-  const $stockInfo = $('#stockPage');
+  const $stockPage = $('#stockPage');
   const day = new Date(new Date().setDate(new Date().getDate()-1)).toISOString().split('T')[0].toString();
 
   if ($stocksList.length > 0) {
@@ -18,40 +18,26 @@ $(document).ready(function(){
         $stockRow.find('.price').text('$' + price);
       });
     }
-  } else if ($stockInfo.length > 0) {
-    const symbol = $stockInfo.data('stock-symbol');
+  } else if ($stockPage.length > 0) {
+    const symbol = $stockPage.data('stock-symbol');
 
-    requestDailyTimeSeries(symbol, function(result) {
+    requestTimeSeries(symbol, function(result) {
       const price = parseFloat(result['Time Series (Daily)'][day]['4. close'], 2).toFixed(2);
 
-      $stockInfo.find('.price').text('$' + price);
+      $stockPage.find('.price').text('$' + price);
 
       buildChart(processData(result));
+
+      chartButtonListener();
     });
   }
 });
 
-function requestDailyTimeSeries(symbol, callBack) {
-  $.ajax({
-    url: "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol="+ symbol+"&apikey=0YYNS3HALJIQTTGC",
-    success: function(result) {
-      callBack(result);
-    }
-  });
-}
+function requestTimeSeries(symbol, callBack, timeframe = "daily",) {
+  const url = "https://www.alphavantage.co/query?function=TIME_SERIES_" + timeframe.toUpperCase() + "&symbol="+ symbol+"&apikey=0YYNS3HALJIQTTGC";
 
-function requestWeeklyTimeSeries(symbol, callBack) {
   $.ajax({
-    url: "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol="+ symbol+"&apikey=0YYNS3HALJIQTTGC",
-    success: function(result) {
-      callBack(result);
-    }
-  });
-}
-
-function requestMontlyTimeSeries(symbol, callBack) {
-  $.ajax({
-    url: "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol="+ symbol+"&apikey=0YYNS3HALJIQTTGC",
+    url: url,
     success: function(result) {
       callBack(result);
     }
@@ -59,37 +45,67 @@ function requestMontlyTimeSeries(symbol, callBack) {
 }
 
 function processData(rawData) {
-  const metaData = rawData['Meta Data'];
-  const stockData = rawData['Time Series (Daily)'];
+  let metaData;
+  let stockData;
+  let isMonthly = false;
+
+  for (key in rawData) {
+    if (rawData.hasOwnProperty(key)) {
+
+      if (key.indexOf('Meta Data') !== -1) {
+        metaData = rawData[key];
+      } else if (key.indexOf('Time Series') !== -1) {
+        stockData = rawData[key];
+        if (key.indexOf('Monthly') !== -1) {
+          isMonthly = true;
+        }
+      }
+    }
+  }
 
   let processedData = [];
   let labels = [];
   let dataObj = {};
   let maxDays = 30;
+  let maxMonths = 12;
 
-  for (day in stockData) {
-    if (stockData.hasOwnProperty(day)) {
-      let dayCoord = day;
+  for (time in stockData) {
+    if (stockData.hasOwnProperty(time)) {
+      let timeCoord = time;
 
-      if (day.indexOf(' ') !== -1) {
-        dayCoord = day.substr(0, day.indexOf(' '))
+      if (time.indexOf(' ') !== -1) {
+        timeCoord = time.substr(0, time.indexOf(' '));
+      }
+
+      if (isMonthly) {
+        timeCoord = moment(timeCoord).format('MMMM');
       }
 
       processedData.push({
-        x: dayCoord,
-        y: stockData[day]['4. close']
+        x: timeCoord,
+        y: stockData[time]['4. close']
       });
 
-      labels.unshift(dayCoord);
+      if (isMonthly) {
 
-      maxDays--;
+        labels.unshift(timeCoord);
 
-      if (maxDays === 0) {
-        break;
+        maxMonths--;
+
+        if (maxMonths === 0) {
+          break;
+        }
+      } else {
+        labels.unshift(timeCoord);
+
+        maxDays--;
+
+        if (maxDays === 0) {
+          break;
+        }
       }
     }
   }
-  console.log(processedData);
 
   dataObj = {
     labels: labels,
@@ -105,7 +121,6 @@ function processData(rawData) {
 }
 
 function buildChart(data) {
-  console.log(data);
   const ctx = document.getElementById('stockChart').getContext('2d');
   const myChart = new Chart(ctx, {
     type: 'line',
@@ -113,5 +128,30 @@ function buildChart(data) {
   });
 
   $('#chartLoader').addClass('hide');
+
+}
+
+function chartButtonListener()  {
+  const $chartButtons = $('.chart-btns a');
+  const symbol = $('#stockSymbol').text();
+
+  $chartButtons.on('click', function(event) {
+    event.preventDefault();
+
+    const $loader = $('#chartLoader');
+    const timeframe = event.target.getAttribute('data-timeframe');
+    const $chartCanvas = $('#stockChart');
+
+    $loader.removeClass('hide');
+    $chartCanvas.remove();
+    $('.chart-container').append('<canvas id="stockChart" width="600" height="400"></canvas>')
+
+    requestTimeSeries(symbol, function(result) {
+      buildChart(processData(result));
+    }, timeframe);
+  });
+}
+
+function getLastTwelveMonths() {
 
 }

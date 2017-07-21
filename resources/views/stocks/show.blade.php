@@ -5,7 +5,7 @@
   <header class="section card-panel deep-purple lighten-5">
     <div class="row">
       <div class="col s11">
-        <h1>{{$stock->symbol}}</h1>
+        <h1 id="stockSymbol">{{$stock->symbol}}</h1>
         <h4>{{$stock->name}}</h4>
       </div>
       <div class="col s1">
@@ -57,14 +57,7 @@
       </div>
     </div>
   </header>
-  <section class="section">
-    <div class="col s12 center">
-      <div id="chartLoader" class="progress">
-         <div class="indeterminate"></div>
-     </div>
-      <canvas id="stockChart" width="600" height="400"></canvas>
-    </div>
-  </section>
+  @include('stocks._chart', $stock)
 </div>
 
 
