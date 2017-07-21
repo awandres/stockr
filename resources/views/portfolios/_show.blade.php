@@ -8,7 +8,7 @@
     <div class="row">
       <div id="stocksList" class="col s12 collection">
         @foreach ($portfolio->stocks as $stock)
-          <a href="/stocks/{{$stock->id}}" class="collection-item">
+          <a href="/stocks/{{$stock->slug}}" class="collection-item">
             <div class="row valign-wrapper stock-info">
 
               <div class="col s2 symbol">
