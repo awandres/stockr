@@ -7,7 +7,7 @@ use App\Stock;
 
 class StocksController extends Controller
 {
-    public function __contruct()
+    public function __construct()
     {
       $this->middleware('auth');
     }
