@@ -11,6 +11,7 @@
       <th>Industry</th>
       <th>Last Closing Price</th>
       <th></th>
+      <th></th>
     </thead>
 
     <tbody>
@@ -37,11 +38,14 @@
               </div>
             </div>
           </td>
-          <td class="add-btn">
+          <td>
+            <a href="/stocks/{{$stock->slug}}" class="btn-floating waves-effect waves-light" title="view stock info"><i class="material-icons">info_outline</i></a>
+          </td>
+          <td class="btn-add">
             <form class="" action="/portfolio/add_stock" method="post">
               {{  csrf_field() }}
               <input type="hidden" name="stock_id" value="{{$stock->id}}">
-              <button type="submit" name="action" class="btn-floating btn-large waves-effect waves-light red" title="add to portfolio"><i class="material-icons">add</i></button>
+              <button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="add to portfolio"><i class="material-icons">add</i></button>
             </form>
           </td>
         </tr>
