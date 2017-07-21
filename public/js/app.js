@@ -31715,7 +31715,7 @@ $(document).ready(function () {
 
       var symbol = $stockRow.find('.symbol').text().trim();
 
-      requestDailyTimeSeries(symbol, function (result) {
+      requestTimeSeries(symbol, function (result) {
         var price = parseFloat(result['Time Series (Daily)'][day]['4. close'], 2).toFixed(2);
 
         $stockRow.find('.price').text('$' + price);
