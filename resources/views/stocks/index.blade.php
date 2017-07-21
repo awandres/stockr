@@ -20,7 +20,7 @@
             search by stock symbol:
             <label>
               Off
-              <input type="checkbox" id="by_symbol" name="by_symbol">
+              <input type="checkbox" id="by_symbol" name="by_symbol" checked>
               <span class="lever"></span>
               On
             </label>

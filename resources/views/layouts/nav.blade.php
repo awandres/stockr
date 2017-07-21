@@ -1,6 +1,7 @@
 <div class="navbar-fixed">
   <nav>
     <div class="nav-wrapper deep-purple">
+      <a href="/" class="brand-logo" style="padding-left:1em;">Stockr</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         @if (auth()->check())
           <li><a href="logout">logout</a></li>
