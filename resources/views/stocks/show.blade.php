@@ -1,12 +1,23 @@
 @extends('layouts.master')
 
 @section('content')
-
+<div id="stockPage" data-stock-symbol="{{$stock->symbol}}">
   <header class="section card-panel deep-purple lighten-5">
     <div class="row">
-      <div class="col s12">
+      <div class="col s11">
         <h1>{{$stock->symbol}}</h1>
         <h4>{{$stock->name}}</h4>
+      </div>
+      <div class="col s1">
+        <div class="price">
+          <div class="preloader-wrapper small active">
+            <div class="spinner-layer">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row" style="position:relative;">
@@ -47,8 +58,15 @@
     </div>
   </header>
   <section class="section">
-
+    <div class="col s12 center">
+      <div id="chartLoader" class="progress">
+         <div class="indeterminate"></div>
+     </div>
+      <canvas id="stockChart" width="600" height="400"></canvas>
+    </div>
   </section>
+</div>
+
 
 
 @endsection

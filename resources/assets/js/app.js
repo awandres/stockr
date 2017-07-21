@@ -6,5 +6,5 @@
  */
 
 require('./bootstrap');
-
+require('chart.js');
 require('./alphaVantage');
