@@ -28,7 +28,7 @@ Route::get('/logout', 'SessionsController@destroy');
 
 
 // user paths
-Route::get('/dashboard', 'RegistrationsController@show')->name('dashboard');
+Route::get('/dashboard', 'UsersController@show')->name('dashboard');
 
 
 // stocks paths

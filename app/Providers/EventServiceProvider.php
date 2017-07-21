@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use App\User;
+use App\Portfolio;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,9 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+        User::created(function($user) {
+          $portfolio = new Portfolio();
+          $user->portfolio()->save($portfolio);
+        });
     }
 }
