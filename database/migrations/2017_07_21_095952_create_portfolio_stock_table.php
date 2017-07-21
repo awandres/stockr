@@ -36,7 +36,7 @@ class CreatePortfolioStockTable extends Migration
       */
      public function down()
      {
-         Schema::table('portfolios', function (Blueprint $table) {
+         Schema::table('portfolio_stock', function (Blueprint $table) {
            $table->dropForeign(['portfolio_id']);
            $table->dropForeign(['stock_id']);
          });

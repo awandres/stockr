@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col s12 collection">
         @foreach ($portfolio->stocks as $stock)
-          <a href="/stock/{{$stock->id}}" class="collection-item">{{$stock->symbol}}</a>
+          <a href="/stocks/{{$stock->id}}" class="collection-item">{{$stock->symbol}}</a>
         @endforeach
       </div>
     </div>

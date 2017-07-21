@@ -20,6 +20,7 @@ class CreateStocksTable extends Migration
             $table->string('symbol')->unique();
             $table->string('sector');
             $table->string('industry');
+            $table->string('slug')->default('');
         });
     }
 

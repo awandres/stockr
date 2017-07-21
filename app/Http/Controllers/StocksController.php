@@ -18,4 +18,9 @@ class StocksController extends Controller
 
       return view('stocks.index', compact('stocks'));
     }
+
+    public function show(Stock $stock)
+    {
+      return view('stocks.show', compact('stock'));
+    }
 }
