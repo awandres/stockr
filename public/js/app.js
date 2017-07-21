@@ -791,12 +791,6 @@ __webpack_require__(10);
 
 __webpack_require__(50);
 
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-
 /***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {

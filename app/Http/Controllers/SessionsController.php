@@ -25,7 +25,7 @@ class SessionsController extends Controller
       ]);
     }
 
-    return redirect('/');
+    return redirect()->route('dashboard');
   }
 
   public function destroy()
