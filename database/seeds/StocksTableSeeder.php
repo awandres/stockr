@@ -27,7 +27,7 @@ class StocksTableSeeder extends CsvSeeder
           5 => 'Sector',
           6 => 'industry'
         ];
-        //
+        
         // foreach ($MARKETS as $market) {
         //   if (($handle = fopen (database_path("seeds/stock_names/{$market}.csv"), 'r')) !== FALSE)
         //   {
@@ -43,8 +43,8 @@ class StocksTableSeeder extends CsvSeeder
         //   }
         // }
 
+        $this->seedFromCSV(database_path("seeds/stock_names/nasdaq.csv"), 'stocks');
         $this->seedFromCSV(database_path("seeds/stock_names/nyse.csv"), 'stocks');
         $this->seedFromCSV(database_path("seeds/stock_names/amex.csv"), 'stocks');
-        $this->seedFromCSV(database_path("seeds/stock_names/nasdaq.csv"), 'stocks');
     }
 }

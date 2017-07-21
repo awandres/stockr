@@ -14,7 +14,7 @@ class StocksController extends Controller
 
     public function index()
     {
-      $stocks = Stock::simplePaginate(50);
+      $stocks = Stock::orderBy('symbol', 'asc')->simplePaginate(50);
 
       return view('stocks.index', compact('stocks'));
     }
