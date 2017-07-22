@@ -81,7 +81,7 @@ function processData(rawData) {
         timeCoord = moment(timeCoord).format('MMMM');
       }
 
-      processedData.push({
+      processedData.unshift({
         x: timeCoord,
         y: stockData[time]['4. close']
       });
