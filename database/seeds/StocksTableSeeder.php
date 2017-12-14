@@ -13,20 +13,8 @@ class StocksTableSeeder extends Seeder
      */
     public function run()
     {
-        $MARKETS = ['amex', 'nasdaq', 'nyse'];
 
-        // $this->aliases = [
-        //   'Name' => 'name',
-        //   'Symbol' => 'symbol',
-        //   'Sector' => 'sector'
-        // ];
-        //
-        // $this->mapping = [
-        //   0 => 'Symbol',
-        //   1 => 'Name',
-        //   5 => 'Sector',
-        //   6 => 'industry'
-        // ];
+        $MARKETS = ['amex', 'nasdaq', 'nyse'];
 
         foreach ($MARKETS as $market) {
           if (($handle = fopen (database_path("seeds/stock_names/{$market}.csv"), 'r')) !== FALSE)
@@ -35,7 +23,7 @@ class StocksTableSeeder extends Seeder
               if( !empty($data[0])
                   && !Stock::where('symbol', $data[0])->exists()
                   && $data[0] != 'Symbol') {
-                echo $data[0] . '\n';
+                    
                 $stock = new Stock();
                 $stock->symbol = $data[0];
                 $stock->name = $data[1];
@@ -48,9 +36,5 @@ class StocksTableSeeder extends Seeder
             fclose ( $handle );
           }
         }
-
-        // $this->seedFromCSV(database_path("seeds/stock_names/nasdaq.csv"), 'stocks');
-        // $this->seedFromCSV(database_path("seeds/stock_names/nyse.csv"), 'stocks');
-        // $this->seedFromCSV(database_path("seeds/stock_names/amex.csv"), 'stocks');
     }
 }
