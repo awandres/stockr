@@ -8,6 +8,8 @@ As the newest developer to join the Stockr<sup>TM</sup> team, your task is to cr
 
 As a user I should be able to navigate to `/users` once I am logged in and view a list of all users on the platform. From here I should be able to click into an individual user's profile and view what stocks they have in their portfolio (and obviously not be able to alter it!). From either of these views I should also be able to toggle whether or not I'm following the given user and see a list of just those users.
 
+As a bonus, allow users to leave comments on other users' portfolios.
+
 Tech is an ever changing world and we need this implemented ASAP! Please get this feature implemented and returned within 72 hours.
 
 ***
@@ -21,3 +23,7 @@ Tech is an ever changing world and we need this implemented ASAP! Please get thi
   - Make sure MYSQL is [installed](https://dev.mysql.com/downloads/installer/) and running on your local machine - you don't have to use MYSQL, any SQL database will do, but the app is currently configured for it so it will make your life easier.
   - Create and fill in you `.env` file following the `.env.example` included with the code (mostly just to make sure you can connect to your local database)
   - Finally, run either `npm install` or `yarn install` (your preference) to install the frontend dependencies and serve the app locally using `php artisan serve` (should appear on [localhost:8000](localhost:8000)). If you don't have npm or yarn installed on your local machine [here are the docs to install nodejs](https://nodejs.org/en/download/package-manager/) - npm comes with Node.
+
+You have 72 hours to complete the project and return it to us, but it should only take 4-5 hours (for your own sanity, please don't spend the whole 72 hours working on this). To send your completed assignment back to us, navigate to the root directory of the app and run `git bundle create <you_name_here>_hatch_take_home.bundle HEAD master` (replacing `<your_name_here>` with your name) and then email us the resultant file. Don't worry if there are some features you can't fully implement or things aren't exactly the way you want them to be. As long as it's mostly functional we'll go over it in person and discuss what you could have done if given more time.
+
+If you have any questions please don't hesitate to email `jay@hatchapps.com` with your question (please put `Hatch Take Home - <your_name_here>` in the subject line).
