@@ -23,7 +23,7 @@ class StocksTableSeeder extends Seeder
               if( !empty($data[0])
                   && !Stock::where('symbol', $data[0])->exists()
                   && $data[0] != 'Symbol') {
-                    
+
                 $stock = new Stock();
                 $stock->symbol = $data[0];
                 $stock->name = $data[1];

@@ -8,7 +8,7 @@ As the newest developer to join the Stockr<sup>TM</sup> team, your task is to cr
 
 As a user I should be able to navigate to `/users` once I am logged in and view a list of all users on the platform. From here I should be able to click into an individual user's profile and view what stocks they have in their portfolio (and obviously not be able to alter it!). From either of these views I should also be able to toggle whether or not I'm following the given user and see a list of just those users.
 
-As a bonus, allow users to leave comments on other users' portfolios.
+Additionally, we want to foster an atmosphere of community here at Stockr<sup>TM</sup>. To do this we want to allow users to add comments on the portfolios of users they have followed. This should be viewable on the User's portfolio page to all who visit it (especially the User themselves), but only those who have followed the user should be able to leave a comment (so no commenting on your own portfolio). However, the user whose portfolio it is should be able to delete any comments left on it.
 
 Tech is an ever changing world and we need this implemented ASAP! Please get this feature implemented and returned within 72 hours.
 
