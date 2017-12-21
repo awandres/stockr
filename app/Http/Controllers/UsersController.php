@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class UsersController extends Controller
 {
@@ -16,5 +17,12 @@ class UsersController extends Controller
       $user = auth()->user();
 
       return view('users.show', compact('user'));
+    }
+
+    public function index()
+    {
+      $users = User::orderBy('created_at', 'desc')->simplePaginate(50);
+
+      return view('users.index', compact('users'));
     }
 }

@@ -29,7 +29,7 @@ Route::get('/logout', 'SessionsController@destroy');
 
 // user paths
 Route::get('/dashboard', 'UsersController@show')->name('dashboard');
-
+Route::get('/users', 'UsersController@index');
 
 // stocks paths
 Route::get('/stocks', 'StocksController@index');
