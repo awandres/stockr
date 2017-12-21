@@ -25,6 +25,7 @@
               On
             </label>
           </span>
+          <br>
           <span class="switch">
             search by company name:
             <label>

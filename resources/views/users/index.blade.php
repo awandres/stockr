@@ -21,6 +21,7 @@
 
     <tbody>
       @foreach ($users as $user)
+        @unless($thisUser == $user)
         <tr class="stock-info">
           <td class="symbol">
             {{$user->name}}
@@ -29,7 +30,7 @@
             {{$user->email}}
           </td>
           <td>
-            <a href="/user/{{$user->slug}}" class="btn-floating waves-effect waves-light" title="View User Info"><i class="material-icons">info_outline</i></a>
+            <a href="/users/{{$user->id}}" class="btn-floating waves-effect waves-light" title="View User Info"><i class="material-icons">info_outline</i></a>
           </td>
           <td class="btn-add">
             <form class="" action="/portfolio/add_stock" method="post">
@@ -39,6 +40,7 @@
             </form>
           </td>
         </tr>
+        @endunless
       @endforeach
     </tbody>
   </table>

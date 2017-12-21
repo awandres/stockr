@@ -19,10 +19,17 @@ class UsersController extends Controller
       return view('users.show', compact('user'));
     }
 
+    public function view($id)
+    {
+      $user = User::find($id);
+      return view('users.userShow', compact('user'));
+    }
+
     public function index()
     {
+      $thisUser = auth()->user();
       $users = User::orderBy('created_at', 'desc')->simplePaginate(50);
 
-      return view('users.index', compact('users'));
+      return view('users.index', compact('users', 'thisUser'));
     }
 }
