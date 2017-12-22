@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
       return $this->hasOne(Portfolio::class);
     }
+
+    public function following()
+    {
+      return $this->belongsToMany(Following::class);
+    }
 }

@@ -26,10 +26,12 @@ Route::get('/login', 'SessionsController@create')->name('login');
 Route::post('/login', 'SessionsController@store');
 Route::get('/logout', 'SessionsController@destroy');
 
+// following path
+Route::post('/following/add_follow', 'FollowingController@add_follow');
 
 // user paths
 Route::get('/dashboard', 'UsersController@show')->name('dashboard');
-Route::get('/users', 'UsersController@index');
+Route::get('/users', 'UsersController@index')->name('users');
 Route::get('/users/{user}', 'UsersController@view');
 
 // stocks paths
