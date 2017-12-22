@@ -29,10 +29,11 @@ Route::get('/logout', 'SessionsController@destroy');
 // follows path
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/follows/add_follow', 'UsersController@follow');
-    Route::delete('/follows/remove_follow', 'UsersController@unfollow');
+    Route::post('/follows/remove_follow', 'UsersController@unfollow');
 });
 // user paths
 Route::get('/dashboard', 'UsersController@show')->name('dashboard');
+Route::post('/users', 'UsersController@search');
 Route::get('/users', 'UsersController@index')->name('users');
 Route::get('/users/{user}', 'UsersController@view');
 

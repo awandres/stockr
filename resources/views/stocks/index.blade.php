@@ -84,11 +84,20 @@
             <a href="/stocks/{{$stock->slug}}" class="btn-floating waves-effect waves-light" title="view stock info"><i class="material-icons">info_outline</i></a>
           </td>
           <td class="btn-add">
-            <form class="" action="/portfolio/add_stock" method="post">
-              {{  csrf_field() }}
-              <input type="hidden" name="stock_id" value="{{$stock->id}}">
-              <button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="add to portfolio"><i class="material-icons">add</i></button>
-            </form>
+            @if (auth()->user()->portfolio->stocks->contains($stock->id))
+              <form class="" action="/portfolio/remove_stock" method="post">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+                <input type="hidden" name="stock_id" value="{{$stock->id}}">
+                <button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="remove from portfolio"><i class="material-icons">remove</i></button>
+              </form>
+            @else
+              <form class="" action="/portfolio/add_stock" method="post">
+                {{  csrf_field() }}
+                <input type="hidden" name="stock_id" value="{{$stock->id}}">
+                <button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="add to portfolio"><i class="material-icons">add</i></button>
+              </form>
+            @endif
           </td>
         </tr>
       @endforeach

@@ -4,10 +4,19 @@
 
 
 
-<h1>BROKERS</h1>
+<h1>Stockrs</h1>
 
 <div class="row">
-  Search Here
+  <form class="" action="/users" method="post">
+    {{  csrf_field() }}
+    <div class="row">
+      <div class="col s12 input-field">
+
+        <i class="material-icons prefix">search</i>
+        <input id="search" name="search" type="text" class="validate">
+        <label for="search">Search by Name</label>
+      </div>
+    </div>
 </div>
 
 <div class="stocks-table">
@@ -21,7 +30,7 @@
 
     <tbody>
       @foreach ($users as $user)
-        @unless($thisUser == $user)
+        @unless($thisUser->id == $user->id)
         <tr class="stock-info">
           <td class="symbol">
             {{$user->name}}
@@ -33,11 +42,21 @@
             <a href="/users/{{$user->id}}" class="btn-floating waves-effect waves-light" title="View User Info"><i class="material-icons">info_outline</i></a>
           </td>
           <td class="btn-add">
+            @if ($thisUser->following->contains('id', $user->id))
+            <form class="" action="/follows/remove_follow" method="post">
+              {{ csrf_field() }}
+              <!-- {{ method_field('DELETE') }} -->
+              <input type="hidden" name="toUnfollow_id" value="{{$user->id}}">
+              <button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="Unfollow"><i class="material-icons">remove</i></button>
+            </form>
+
+            @else
             <form class="" action="/follows/add_follow" method="post">
               {{  csrf_field() }}
               <input type="hidden" name="toFollow_id" value="{{$user->id}}">
               <button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="Follow"><i class="material-icons">add</i></button>
             </form>
+            @endif
           </td>
         </tr>
         @endunless
@@ -47,7 +66,7 @@
 </div>
 
 <div class="pagination">
-  Links Here
+  {{ $users->links() }}
 </div>
 
 @endsection

@@ -28,12 +28,21 @@
         </div>
       </div>
       <div class="col s6 l2 right-align" style="position:absolute;right:0;bottom:0;">
-          <form class="" action="/portfolio/remove_stock" method="post">
-            {{ csrf_field() }}
-            {{ method_field('DELETE') }}
-            Unfollow<input type="hidden" name="stock_id" value="{{$user->id}}">
-            <button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="remove from portfolio"><i class="material-icons">remove</i></button>
-          </form>
+        @if ($thisUser->following->contains('id', $user->id))
+        <form class="" action="/follows/remove_follow" method="post">
+          {{ csrf_field() }}
+          <!-- {{ method_field('DELETE') }} -->
+          <input type="hidden" name="toUnfollow_id" value="{{$user->id}}">
+          <button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="Unfollow"><i class="material-icons">remove</i></button>
+        </form>
+
+        @else
+        <form class="" action="/follows/add_follow" method="post">
+          {{  csrf_field() }}
+          <input type="hidden" name="toFollow_id" value="{{$user->id}}">
+          <button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="Follow"><i class="material-icons">add</i></button>
+        </form>
+        @endif
 
       </div>
     </div>

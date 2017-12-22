@@ -38,9 +38,25 @@ class User extends Authenticatable
       return $this->belongsToMany('App\User', 'followers', 'following_user_id')->withTimeStamps();
     }
 
+    public function createSlug()
+    {
+      $this->slug = str_slug($this->name);
+    }
+
     public function isFollowing(User $user)
     {
       return !is_null($this->following()->where('user_id', $user->id)->first());
+    }
+
+    public function scopeSearchByName($query, $name, $or = false)
+    {
+      if (!empty($name)) {
+        if ($or) {
+          return $query->orWhere('name', 'LIKE', "%{$name}%");
+        } else {
+          return $query->where('name', 'LIKE', "%{$name}%");
+        }
+      }
     }
     // public function following()
     // {
