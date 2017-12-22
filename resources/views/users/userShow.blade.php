@@ -29,7 +29,7 @@
       </div>
       <div class="col s6 l2 right-align" style="position:absolute;right:0;bottom:0;">
         @if ($thisUser->following->contains('id', $user->id))
-        <form class="" action="/follows/remove_follow" method="post">
+        <p>Unfollow<p><form class="" action="/follows/remove_follow" method="post">
           {{ csrf_field() }}
           <!-- {{ method_field('DELETE') }} -->
           <input type="hidden" name="toUnfollow_id" value="{{$user->id}}">
@@ -37,7 +37,7 @@
         </form>
 
         @else
-        <form class="" action="/follows/add_follow" method="post">
+        <p>Follow</p><form class="" action="/follows/add_follow" method="post">
           {{  csrf_field() }}
           <input type="hidden" name="toFollow_id" value="{{$user->id}}">
           <button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="Follow"><i class="material-icons">add</i></button>
@@ -47,6 +47,7 @@
       </div>
     </div>
   </header>
+    <p> (You can add or remove his stocks to/from your portfolio!) </p>
   @include('portfolios._show', [
     'portfolio' => $user->portfolio
   ])

@@ -23,6 +23,15 @@ class UsersController extends Controller
 
     }
 
+    public function filter()
+    {
+      $thisUser = auth()->user();
+      $users = $thisUser->following()->simplePaginate(50);
+      $filtered = true;
+
+      return view('users.index', compact('users', 'thisUser', 'filtered'));
+    }
+
     public function show()
     {
       $user = auth()->user();
@@ -39,15 +48,16 @@ class UsersController extends Controller
 
     public function index()
     {
+      $filtered = false;
       $thisUser = auth()->user();
       $users = User::orderBy('created_at', 'desc')->simplePaginate(50);
       // $isFollowing = $thisUser->following()->contains($this->id);
-      return view('users.index', compact('users', 'thisUser'));
+      return view('users.index', compact('users', 'thisUser', 'filtered'));
     }
 
     public function follow()
     {
-      $toFollow = User::where('id', request('toFollow_id'))->firstOrFail();
+      $toFollow = User::find(request('toFollow_id'));
       $user = User::find(auth()->user()->id);
 
       $user->following()->attach($toFollow->id);

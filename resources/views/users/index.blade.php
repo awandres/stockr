@@ -17,7 +17,26 @@
         <label for="search">Search by Name</label>
       </div>
     </div>
+  </form>
 </div>
+
+
+<div class="row">
+  @if ($filtered)
+
+    See All Users
+    <a href="/users/"><button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="remove from portfolio"><i class="material-icons">add</i></button></a>
+
+  @else
+
+    Filter by Following<input type="hidden" name="" value="">
+    <a href="/filtered/users"><button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="remove from portfolio"><i class="material-icons">remove</i></button></a>
+
+  @endif
+</div>
+
+
+
 
 <div class="stocks-table">
   <table id="stocksList" class="bordered responsive-table highlight centered">
@@ -50,12 +69,15 @@
               <button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="Unfollow"><i class="material-icons">remove</i></button>
             </form>
 
-            @else
+            @elseif (!$thisUser->following->contains('id', $user->id))
             <form class="" action="/follows/add_follow" method="post">
               {{  csrf_field() }}
               <input type="hidden" name="toFollow_id" value="{{$user->id}}">
               <button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="Follow"><i class="material-icons">add</i></button>
             </form>
+
+            @else
+
             @endif
           </td>
         </tr>
