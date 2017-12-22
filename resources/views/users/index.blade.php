@@ -15,8 +15,8 @@
     <thead>
       <th>Name</th>
       <th>Email</th>
-      <th>User Info</th>
-      <th>Follow</th>
+      <th></th>
+      <th></th>
     </thead>
 
     <tbody>
@@ -33,13 +33,9 @@
             <a href="/users/{{$user->id}}" class="btn-floating waves-effect waves-light" title="View User Info"><i class="material-icons">info_outline</i></a>
           </td>
           <td class="btn-add">
-            <form class="" action="/following/add_follow" method="post">
+            <form class="" action="/follows/add_follow" method="post">
               {{  csrf_field() }}
-              <input type="hidden" name="user_id" value="{{$user->id}}">
-
-              
-              <button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="Follow"><i class="material-icons">add</i></button>
-
+              <input type="hidden" name="toFollow_id" value="{{$user->id}}">
               <button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="Follow"><i class="material-icons">add</i></button>
             </form>
           </td>

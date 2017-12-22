@@ -26,9 +26,11 @@ Route::get('/login', 'SessionsController@create')->name('login');
 Route::post('/login', 'SessionsController@store');
 Route::get('/logout', 'SessionsController@destroy');
 
-// following path
-Route::post('/following/add_follow', 'FollowingController@add_follow');
-
+// follows path
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/follows/add_follow', 'UsersController@follow');
+    Route::delete('/follows/remove_follow', 'UsersController@unfollow');
+});
 // user paths
 Route::get('/dashboard', 'UsersController@show')->name('dashboard');
 Route::get('/users', 'UsersController@index')->name('users');

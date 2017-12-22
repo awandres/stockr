@@ -32,4 +32,26 @@ class UsersController extends Controller
 
       return view('users.index', compact('users', 'thisUser'));
     }
+
+    public function follow()
+    {
+      $toFollow = User::where('id', request('toFollow_id'))->firstOrFail();
+      $user = User::find(auth()->user()->id);
+
+      $user->following()->attach($toFollow->id);
+
+      return redirect('users');
+    }
+
+    public function unfollow($name)
+    {
+      $toFollow = User::where('name', $name)->firstOrFail();
+      $user = User::find(auth()->user()->id);
+
+      $user->following()->attach($toFollow->id);
+
+      return redirect('users');
+    }
+
+
 }
