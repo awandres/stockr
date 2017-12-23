@@ -28,6 +28,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function getRouteKeyName()
+    {
+      return 'slug';
+    }
+
     //user has one portfolio
     public function portfolio()
     {
@@ -43,7 +48,7 @@ class User extends Authenticatable
     //tried to make a slug
     public function createSlug()
     {
-      $this->slug = str_slug($this->name);
+      $this->slug = str_slug($this->name, '-');
     }
 
     //user has many comments
