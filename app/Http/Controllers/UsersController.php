@@ -35,11 +35,12 @@ class UsersController extends Controller
 
     public function show()
     {
+      $currentUser = auth()->user();
       $user = auth()->user();
       // $comments = Comment::where('posted_to_id', $user->id);
-      $comments = $user->comments();
+      $comments = $user->comments()->orderBy('created_at', 'desc')->get();
 
-      return view('users.show', compact('user', 'comments'));
+      return view('users.show', compact('user', 'comments', 'currentUser'));
     }
 
     public function view($id)
@@ -47,7 +48,7 @@ class UsersController extends Controller
       $currentUser = auth()->user();
       $user = User::find($id);
       // $comments = Comment::where('posted_to_id', $user);
-      $comments = Comment::all();
+      $comments = $user->comments()->orderBy('created_at', 'desc')->get();
 
       return view('users.userShow', compact('user', 'currentUser', 'comments'));
     }
@@ -58,6 +59,7 @@ class UsersController extends Controller
       $currentUser = auth()->user();
       $users = User::orderBy('created_at', 'desc')->simplePaginate(50);
       // $isFollowing = $currentUser->following()->contains($this->id);
+
       return view('users.index', compact('users', 'currentUser', 'filtered'));
     }
 
@@ -79,12 +81,6 @@ class UsersController extends Controller
       $user->following()->detach($toUnfollow->id);
 
       return redirect()->back();
-    }
-
-
-    public function isFollowing(User $user)
-    {
-      return $portfolio->stocks->contains($stock_id);
     }
 
 

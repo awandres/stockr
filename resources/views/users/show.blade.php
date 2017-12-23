@@ -14,7 +14,7 @@
       <div class="row">
         <div class="col s8 offset-s4">
           <p class="flow-text right">
-            Below you can manage and look after your portfolio and see the users you follow.
+            Below you can manage your portfolio and see the comments your friends have left you.
           </p>
         </div>
       </div>

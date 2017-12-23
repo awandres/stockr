@@ -1,4 +1,3 @@
-<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 @if ($currentUser->following->contains('id', $user->id))
 <meta name="csrf-token" content="{{ csrf_token() }}" />
