@@ -17,20 +17,6 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -54,14 +40,6 @@ class CommentsController extends Controller
         'posted_to_id' => $posted_to->id
       ]);
 
-      // $comment = new Comment();
-      // $comment->author = auth()->user()->name;
-      // $comment->content = request('content');
-      // $comment->associate($posted_to);
-      //
-      // $comment->save();
-
-      // $posted_to->comments()->attach($posted_to_id);
 
       return redirect()->back();
 
@@ -74,11 +52,6 @@ class CommentsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function delete($id)
-    {
-       $comment = Comment::find($id);
-       return redirect()->route('dashboard');
-     }
 
     public function destroy($id)
     {

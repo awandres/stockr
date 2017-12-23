@@ -21,10 +21,10 @@
       <div class="divider"></div>
       @include('portfolios._show', [
         'portfolio' => $user->portfolio
-      ])
+        ])
       <div class="divider"></div>
-@include('comments._show')
-    </div>
+        @include('comments._show')
+      </div>
 
 
     <!-- <div class="stocks-table">

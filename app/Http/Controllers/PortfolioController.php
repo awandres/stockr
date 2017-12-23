@@ -28,7 +28,7 @@ class PortfolioController extends Controller
         return $stock;
       }
 
-      return redirect()->route('dashboard');
+      return redirect()->back();
     }
 
     public function remove_stock()
@@ -47,7 +47,7 @@ class PortfolioController extends Controller
         return $stock;
       }
 
-      return redirect()->route('dashboard');
+      return redirect()->back();
     }
 
 

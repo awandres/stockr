@@ -28,25 +28,31 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    //user has one portfolio
     public function portfolio()
     {
       return $this->hasOne(Portfolio::class);
     }
 
+    //user belongs to many other users
     public function following()
     {
       return $this->belongsToMany('App\User', 'followers', 'following_user_id')->withTimeStamps();
     }
 
+    //tried to make a slug
     public function createSlug()
     {
       $this->slug = str_slug($this->name);
     }
 
+    //user has many comments
     public function comments()
     {
       return $this->hasMany('App\Comment', 'posted_to_id', 'id');
     }
+
+    //can search by name
     public function scopeSearchByName($query, $name, $or = false)
     {
       if (!empty($name)) {
@@ -57,8 +63,5 @@ class User extends Authenticatable
         }
       }
     }
-    // public function following()
-    // {
-    //   return $this->belongsToMany(Following::class);
-    // }
+
 }

@@ -24,6 +24,7 @@ class UsersController extends Controller
 
     }
 
+    //filter user search
     public function filter()
     {
       $currentUser = auth()->user();
@@ -33,36 +34,37 @@ class UsersController extends Controller
       return view('users.index', compact('users', 'currentUser', 'filtered'));
     }
 
+    //user dashboard
     public function show()
     {
       $currentUser = auth()->user();
-      $user = auth()->user();
-      // $comments = Comment::where('posted_to_id', $user->id);
-      $comments = $user->comments()->orderBy('created_at', 'desc')->get();
+      $user = auth()->user(); // to keep things consistent with portfolio blade
+      $comments = $currentUser->comments()->orderBy('created_at', 'desc')->get();
 
       return view('users.show', compact('user', 'comments', 'currentUser'));
     }
 
+    //view individual user profile
     public function view($id)
     {
       $currentUser = auth()->user();
       $user = User::find($id);
-      // $comments = Comment::where('posted_to_id', $user);
       $comments = $user->comments()->orderBy('created_at', 'desc')->get();
 
       return view('users.userShow', compact('user', 'currentUser', 'comments'));
     }
 
+    //display all users
     public function index()
     {
       $filtered = false;
       $currentUser = auth()->user();
       $users = User::orderBy('created_at', 'desc')->simplePaginate(50);
-      // $isFollowing = $currentUser->following()->contains($this->id);
 
       return view('users.index', compact('users', 'currentUser', 'filtered'));
     }
 
+    //add follow
     public function follow()
     {
       $toFollow = User::find(request('toFollow_id'));
@@ -73,6 +75,7 @@ class UsersController extends Controller
       return redirect()->back();
     }
 
+    //remove follow
     public function unfollow()
     {
       $toUnfollow = User::where('id', request('toUnfollow_id'))->firstOrFail();
