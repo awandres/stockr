@@ -15,12 +15,13 @@ class UsersController extends Controller
 
     public function search()
     {
+      $filtered = false;
       $currentUser = auth()->user();
       $search = request('search');
       $query = User::orderBy('created_at', 'desc');
       $users = $query->searchByName($search)->simplePaginate(50);
 
-      return view('users.index', compact('users', 'currentUser'));
+      return view('users.index', compact('users', 'currentUser', 'filtered'));
 
     }
 
