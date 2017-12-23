@@ -33,6 +33,7 @@ class EventServiceProvider extends ServiceProvider
         User::created(function($user) {
           $portfolio = new Portfolio();
           $user->portfolio()->save($portfolio);
+          $user->createSlug();
         });
 
         Stock::created(function($stock) {

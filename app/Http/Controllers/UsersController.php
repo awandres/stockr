@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Comment;
 
 class UsersController extends Controller
 {
@@ -14,45 +15,50 @@ class UsersController extends Controller
 
     public function search()
     {
-      $thisUser = auth()->user();
+      $currentUser = auth()->user();
       $search = request('search');
       $query = User::orderBy('created_at', 'desc');
       $users = $query->searchByName($search)->simplePaginate(50);
 
-      return view('users.index', compact('users', 'thisUser'));
+      return view('users.index', compact('users', 'currentUser'));
 
     }
 
     public function filter()
     {
-      $thisUser = auth()->user();
-      $users = $thisUser->following()->simplePaginate(50);
+      $currentUser = auth()->user();
+      $users = $currentUser->following()->simplePaginate(50);
       $filtered = true;
 
-      return view('users.index', compact('users', 'thisUser', 'filtered'));
+      return view('users.index', compact('users', 'currentUser', 'filtered'));
     }
 
     public function show()
     {
       $user = auth()->user();
+      // $comments = Comment::where('posted_to_id', $user->id);
+      $comments = $user->comments();
 
-      return view('users.show', compact('user'));
+      return view('users.show', compact('user', 'comments'));
     }
 
     public function view($id)
     {
-      $thisUser = auth()->user();
+      $currentUser = auth()->user();
       $user = User::find($id);
-      return view('users.userShow', compact('user', 'thisUser'));
+      // $comments = Comment::where('posted_to_id', $user);
+      $comments = Comment::all();
+
+      return view('users.userShow', compact('user', 'currentUser', 'comments'));
     }
 
     public function index()
     {
       $filtered = false;
-      $thisUser = auth()->user();
+      $currentUser = auth()->user();
       $users = User::orderBy('created_at', 'desc')->simplePaginate(50);
-      // $isFollowing = $thisUser->following()->contains($this->id);
-      return view('users.index', compact('users', 'thisUser', 'filtered'));
+      // $isFollowing = $currentUser->following()->contains($this->id);
+      return view('users.index', compact('users', 'currentUser', 'filtered'));
     }
 
     public function follow()

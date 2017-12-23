@@ -2,6 +2,7 @@
 
 @section('content')
 
+
   <div class="row">
     <div class="col s12">
       <div class="row">
@@ -9,9 +10,7 @@
           <h3>Welcome to your dashboard, {{$user->name}}!</h3>
         </div>
       </div>
-      @foreach ($user->following as $following)
-        {{$following->name}}
-      @endforeach
+
       <div class="row">
         <div class="col s8 offset-s4">
           <p class="flow-text right">
@@ -23,9 +22,12 @@
       @include('portfolios._show', [
         'portfolio' => $user->portfolio
       ])
+      <div class="divider"></div>
+@include('comments._show')
     </div>
 
-    <div class="stocks-table">
+
+    <!-- <div class="stocks-table">
       <div class="row">
         <div class="col s12 deep-purple-text">
           <h3>Users You Follow</h3>
@@ -55,7 +57,6 @@
               <td class="btn-add">
                 <form class="" action="/follows/remove_follow" method="post">
                   {{ csrf_field() }}
-                  <!-- {{ method_field('DELETE') }} -->
                   <input type="hidden" name="toUnfollow_id" value="{{$following->id}}">
                   <button type="submit" name="action" class="btn-floating waves-effect waves-light red" title="Unfollow"><i class="material-icons">remove</i></button>
                 </form>
@@ -64,7 +65,7 @@
           @endforeach
         </tbody>
       </table>
-    </div>
+    </div> -->
 
   </div>
 

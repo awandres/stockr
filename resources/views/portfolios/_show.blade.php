@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col s8 offset-s2">
     <div class="row">
-      <div class="col s12 deep-purple-text">
+      <div class="col s12 deep-purple-text center">
         <h3>{{$user->name}}'s Portfolio</h3>
       </div>
     </div>

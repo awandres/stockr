@@ -43,11 +43,10 @@ class User extends Authenticatable
       $this->slug = str_slug($this->name);
     }
 
-    public function isFollowing(User $user)
+    public function comments()
     {
-      return !is_null($this->following()->where('user_id', $user->id)->first());
+      return $this->hasMany('App\Comment', 'posted_to_id', 'id');
     }
-
     public function scopeSearchByName($query, $name, $or = false)
     {
       if (!empty($name)) {

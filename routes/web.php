@@ -30,6 +30,8 @@ Route::get('/logout', 'SessionsController@destroy');
 Route::post('/follows/add_follow', 'UsersController@follow');
 Route::post('/follows/remove_follow', 'UsersController@unfollow');
 
+// comments paths
+Route::post('/comments/{posted_to_id}', 'CommentsController@store');
 
 // user paths
 Route::get('/dashboard', 'UsersController@show')->name('dashboard');
